@@ -23,6 +23,7 @@ def predict():
     # Dự đoán
     df = pd.DataFrame([data['features']], columns=columns)
 
+
     prediction = model.predict(df)
     probability = model.predict_proba(df)[0].tolist()
 
