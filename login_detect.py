@@ -23,7 +23,7 @@ print(f"Loading {info['name']} from {info['path']}")
 model = joblib.load(info["path"])
 threshold = info["threshold"]
 
-@app.route('/predict', methods=['POST'])
+@app.route('/fraud/predict', methods=['POST'])
 def predict():
     try:
     # Request data to predict
@@ -54,6 +54,13 @@ def predict():
             "code": 400,
             "message": str(e)
         }), 400
+
+@app.route('/fraud/health', methods=['GET'])
+def health_check():
+    return jsonify({
+        "status": "ok"
+    }), 200
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
